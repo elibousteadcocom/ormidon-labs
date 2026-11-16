@@ -31,7 +31,7 @@
         Ormidon Labs has arrived. A native AI venture studio. The areas we focus
         on are built on AI.
       </p>
-      <form id="signup" class="know" action="#" method="post" novalidate>
+      <form id="signup" class="know">
         <label for="email">Email address</label>
         <input
           id="email"
@@ -42,12 +42,13 @@
           maxlength="254"
           spellcheck="false"
           placeholder="Email address"
-          required
         />
-        <input type="hidden" name="_subject" value="Stay in the know" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="table" />
-        <button class="btn solid" type="submit">Stay in the know</button>
+        <a
+          id="mail"
+          class="btn solid"
+          href="mailto:operations@ormidon.com?subject=Stay%20in%20the%20know"
+          >Stay in the know</a
+        >
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
     </main>
@@ -61,37 +62,44 @@
       (function () {
         var form = document.getElementById("signup");
         var input = document.getElementById("email");
+        var link = document.getElementById("mail");
         var status = document.getElementById("status");
-        if (!form || !input || !status) return;
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
+        if (!form || !input || !link || !status) return;
+        var subject = "Stay in the know";
+        function mailHref() {
           var email = input.value.trim();
-          input.value = email;
-          var ok =
+          var href =
+            "mailto:operations@ormidon.com?subject=" +
+            encodeURIComponent(subject);
+          if (email) {
+            href += "&body=" + encodeURIComponent("Email address: " + email);
+          }
+          return href;
+        }
+        function valid(email) {
+          return (
             email.length <= 254 &&
             /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/.test(
               email
-            );
-          if (!ok) {
+            )
+          );
+        }
+        link.addEventListener("click", function (event) {
+          var email = input.value.trim();
+          input.value = email;
+          if (email && !valid(email)) {
+            event.preventDefault();
             input.setAttribute("aria-invalid", "true");
-            status.textContent = email
-              ? "Enter a valid email address."
-              : "Enter an email address.";
+            status.textContent = "Enter a valid email address.";
             return;
           }
           input.removeAttribute("aria-invalid");
-          if (form.getAttribute("data-sending") === "true") return;
-          form.setAttribute("data-sending", "true");
-          status.textContent = "Sending…";
-          form.action = "https://formsubmit.co/operations@ormidon.com";
-          form.method = "post";
-          var reply = document.createElement("input");
-          reply.type = "hidden";
-          reply.name = "_replyto";
-          reply.value = email;
-          form.appendChild(reply);
-          status.textContent = "Sending…";
-          form.submit();
+          status.textContent = "";
+          link.href = mailHref();
+        });
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          link.click();
         });
       })();
     </script>
