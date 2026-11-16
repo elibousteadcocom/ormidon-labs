@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ormidon Labs</title>
+    <meta
+      name="description"
+      content="Ormidon Labs has arrived. A native AI venture studio. The areas we focus on are built on AI."
+    />
+    <meta name="theme-color" content="#fc3c00" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="top">
+    <header class="top">
+      <a class="logo" href="#top">
+        <span class="mark" aria-hidden="true"></span>
+        Ormidon Labs
+      </a>
+      <a class="btn" href="#know">Stay in the know</a>
+    </header>
+
+    <main>
+      <p class="where">Bay Area · Los Angeles</p>
+      <h1>
+        <span class="l1">We build what</span>
+        <span class="l2">AI makes</span>
+        <span class="l3">possible.</span>
+      </h1>
+      <p class="intro">
+        Ormidon Labs has arrived. A native AI venture studio. The areas we focus
+        on are built on AI.
+      </p>
+      <form id="signup" class="know" action="#" method="post" novalidate>
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          maxlength="254"
+          spellcheck="false"
+          placeholder="Email address"
+          required
+        />
+        <button class="btn solid" type="submit">Stay in the know</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <footer>
+      <span>© 2026 Ormidon Labs Inc.</span>
+      <span>Bay Area · Los Angeles</span>
+    </footer>
+
+    <script>
+      (function () {
+        var form = document.getElementById("signup");
+        var input = document.getElementById("email");
+        var status = document.getElementById("status");
+        if (!form || !input || !status) return;
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var email = input.value.trim();
+          input.value = email;
+          var ok =
+            email.length <= 254 &&
+            /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/.test(
+              email
+            );
+          if (!ok) {
+            input.setAttribute("aria-invalid", "true");
+            status.textContent = email
+              ? "Enter a valid email address."
+              : "Enter an email address.";
+            return;
+          }
+          input.removeAttribute("aria-invalid");
+          if (form.getAttribute("data-sending") === "true") return;
+          form.setAttribute("data-sending", "true");
+          status.textContent = "Sending…";
+          fetch("https://formsubmit.co/ajax/operations@ormidon.com", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              _subject: "Stay in the know",
+              _template: "table",
+              _captcha: "false",
+              _replyto: email,
+            }),
+          })
+            .then(function (response) {
+              return response.text().then(function (body) {
+                var data = {};
+                try {
+                  data = body ? JSON.parse(body) : {};
+                } catch (err) {
+                  data = {};
+                }
+                return { ok: response.ok, data: data };
+              });
+            })
+            .then(function (result) {
+              var success =
+                result.ok && String(result.data && result.data.success) === "true";
+              if (success) {
+                input.value = "";
+                status.textContent = "You're on the list.";
+                return;
+              }
+              status.textContent = "That email was not sent. Try again.";
+            })
+            .catch(function () {
+              status.textContent = "That email was not sent. Try again.";
+            })
+            .then(function () {
+              form.removeAttribute("data-sending");
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
