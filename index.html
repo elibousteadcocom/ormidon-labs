@@ -92,13 +92,6 @@
           form.appendChild(reply);
           status.textContent = "Sending…";
           form.submit();
-          return;
-            .catch(function () {
-              status.textContent = "That email was not sent. Try again.";
-            })
-            .then(function () {
-              form.removeAttribute("data-sending");
-            });
         });
       })();
     </script>
