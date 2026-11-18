@@ -17,7 +17,6 @@
         <span class="mark" aria-hidden="true"></span>
         Ormidon Labs
       </a>
-      <button class="btn" id="stay" type="button">Stay in the know</button>
     </header>
 
     <main>
@@ -57,11 +56,10 @@
       (function () {
         var form = document.getElementById("signup");
         var input = document.getElementById("email");
-        var stay = document.getElementById("stay");
         var status = document.getElementById("status");
         var thanks =
           "Thank you, we got your email. We'll put you on the mailing list, or we'll be in touch.";
-        if (!form || !input || !stay || !status) return;
+        if (!form || !input || !status) return;
         function valid(email) {
           return (
             email.length <= 254 &&
@@ -85,7 +83,6 @@
           status.textContent = thanks;
           status.scrollIntoView({ block: "nearest" });
         }
-        stay.addEventListener("click", attempt);
         form.addEventListener("submit", function (event) {
           event.preventDefault();
           attempt();
