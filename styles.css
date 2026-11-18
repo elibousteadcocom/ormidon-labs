@@ -75,10 +75,10 @@ input {
 }
 
 .mark {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--orange);
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: block;
 }
 
 .btn {

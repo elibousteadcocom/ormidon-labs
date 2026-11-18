@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="45%" stop-color="#FF9E1B"/>
+      <stop offset="100%" stop-color="#E04F00"/>
+    </linearGradient>
+    <linearGradient id="violetGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C77DFF"/>
+      <stop offset="50%" stop-color="#7B2CBF"/>
+      <stop offset="100%" stop-color="#240046"/>
+    </linearGradient>
+    <linearGradient id="sunsetGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3C096C"/>
+      <stop offset="50%" stop-color="#FF5E1A"/>
+      <stop offset="100%" stop-color="#FFB703"/>
+    </linearGradient>
+    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#10002B" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+  <g transform="translate(512.0, 512.0)" filter="url(#softGlow)">
+    <!-- 6 Interlocking Kinetic Orbit Torus Ribbons -->
+    <g transform="rotate(0)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#amberGrad)"/>
+      <path d="M -110,-155 C 0,-320 240,-270 305,-65 C 335,45 275,180 180,210 C 235,100 205,-55 95,-115 C 15,-160 -65,-135 -110,-155 Z" fill="url(#violetGrad)" opacity="0.88"/>
+    </g>
+    <g transform="rotate(60)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#sunsetGrad)"/>
+    </g>
+    <g transform="rotate(120)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#violetGrad)"/>
+      <path d="M -125,-165 C -10,-340 250,-290 320,-70 C 350,40 290,185 180,215 C 240,105 215,-55 100,-120 C 15,-165 -70,-140 -125,-165 Z" fill="url(#amberGrad)" opacity="0.75"/>
+    </g>
+    <g transform="rotate(180)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#amberGrad)"/>
+    </g>
+    <g transform="rotate(240)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#violetGrad)"/>
+    </g>
+    <g transform="rotate(300)">
+      <path d="M -140,-180 C -20,-380 280,-320 350,-80 C 390,60 310,220 180,240 C 260,120 240,-60 110,-130 C 20,-180 -80,-150 -140,-180 Z" fill="url(#sunsetGrad)"/>
+    </g>
+  </g>
+</svg>
