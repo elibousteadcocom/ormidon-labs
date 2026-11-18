@@ -6,7 +6,7 @@
     <title>Ormidon Labs</title>
     <meta
       name="description"
-      content="Ormidon Labs has arrived. A native AI venture studio. The areas we focus on are built on AI."
+      content="We turn our own ideas into companies, and we build every one of them on AI from day one."
     />
     <meta name="theme-color" content="#fc3c00" />
     <link rel="icon" href="mark.svg" type="image/svg+xml" />
@@ -18,34 +18,72 @@
         <img class="mark" src="mark.svg" alt="" width="40" height="40" />
         Ormidon Labs
       </a>
+      <a class="btn" href="#join">Contact us</a>
     </header>
 
     <main>
-      <p class="where">Bay Area · Los Angeles</p>
-      <h1>
-        <span class="l1">We build what</span>
-        <span class="l2">AI makes</span>
-        <span class="l3">possible.</span>
-      </h1>
-      <p class="intro">
-        Ormidon Labs has arrived. A native AI venture studio. The areas we focus
-        on are built on AI.
-      </p>
-      <form id="signup" class="know">
-        <label for="email">Email address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          inputmode="email"
-          maxlength="254"
-          spellcheck="false"
-          placeholder="Email address"
-        />
-        <button class="btn solid" id="join" type="submit">Stay in the know</button>
-        <p id="status" class="status" role="status" aria-live="polite"></p>
-      </form>
+      <section class="hero">
+        <p class="where">Bay Area · Los Angeles</p>
+        <h1>The AI-native venture studio.</h1>
+        <p class="intro">
+          We turn our own ideas into companies, and we build every one of them
+          on AI from day one.
+        </p>
+        <a class="btn solid" href="#join">Want to join? Contact us</a>
+      </section>
+
+      <section class="ways">
+        <article>
+          <h2>We originate.</h2>
+          <p>Every company starts as our own idea.</p>
+        </article>
+        <article>
+          <h2>We build.</h2>
+          <p>We put a team around each one, with AI at the core.</p>
+        </article>
+        <article>
+          <h2>We stay.</h2>
+          <p>We remain involved until it is a commercial success.</p>
+        </article>
+      </section>
+
+      <section class="join" id="join">
+        <div class="invite">
+          <h2>Want to join?</h2>
+          <p>
+            We're looking for technical people who like building from zero.
+            Tell us about yourself and we'll be in touch.
+          </p>
+        </div>
+        <form id="contact" class="card">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="120" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              maxlength="254"
+              spellcheck="false"
+            />
+          </div>
+          <div class="field wide">
+            <label for="work">Link to your work (GitHub, LinkedIn, portfolio)</label>
+            <input id="work" name="work" type="text" maxlength="300" spellcheck="false" />
+          </div>
+          <div class="field wide">
+            <label for="about">A few words about you</label>
+            <textarea id="about" name="about" rows="4" maxlength="1000"></textarea>
+          </div>
+          <button class="btn solid" type="submit">Contact us</button>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
     </main>
 
     <footer>
@@ -55,38 +93,53 @@
 
     <script>
       (function () {
-        var form = document.getElementById("signup");
-        var input = document.getElementById("email");
+        var form = document.getElementById("contact");
+        var name = document.getElementById("name");
+        var email = document.getElementById("email");
+        var about = document.getElementById("about");
         var status = document.getElementById("status");
-        var thanks =
-          "Thank you, we got your email. We'll put you on the mailing list, or we'll be in touch.";
-        if (!form || !input || !status) return;
-        function valid(email) {
+        var thanks = "Thank you. We'll be in touch.";
+        if (!form || !name || !email || !about || !status) return;
+        function validEmail(value) {
           return (
-            email.length <= 254 &&
+            value.length <= 254 &&
             /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,63}$/.test(
-              email
+              value
             )
           );
         }
-        function attempt() {
-          var email = input.value.trim();
-          input.value = email;
-          if (!valid(email)) {
-            input.setAttribute("aria-invalid", "true");
-            status.textContent = email
-              ? "Enter a valid email address."
-              : "Enter an email address.";
-            input.focus();
-            return;
-          }
-          input.removeAttribute("aria-invalid");
-          status.textContent = thanks;
-          status.scrollIntoView({ block: "nearest" });
-        }
         form.addEventListener("submit", function (event) {
           event.preventDefault();
-          attempt();
+          var person = name.value.trim();
+          var address = email.value.trim();
+          var note = about.value.trim();
+          name.value = person;
+          email.value = address;
+          about.value = note;
+          [name, email, about].forEach(function (field) {
+            field.removeAttribute("aria-invalid");
+          });
+          if (!person) {
+            name.setAttribute("aria-invalid", "true");
+            status.textContent = "Enter your name.";
+            name.focus();
+            return;
+          }
+          if (!validEmail(address)) {
+            email.setAttribute("aria-invalid", "true");
+            status.textContent = address
+              ? "Enter a valid email address."
+              : "Enter your email address.";
+            email.focus();
+            return;
+          }
+          if (!note) {
+            about.setAttribute("aria-invalid", "true");
+            status.textContent = "Tell us a few words about you.";
+            about.focus();
+            return;
+          }
+          status.textContent = thanks;
         });
       })();
     </script>

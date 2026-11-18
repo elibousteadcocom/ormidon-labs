@@ -54,7 +54,8 @@ a {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -104,22 +105,22 @@ input {
 
 .btn:focus-visible,
 .logo:focus-visible,
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 3px;
 }
 
-main {
-  flex: 1;
+.hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 132px var(--pad) 72px;
+  padding: 88px var(--pad) 72px;
   text-align: center;
 }
 
 .where {
-  margin: 0 0 36px;
+  margin: 0 0 28px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -128,102 +129,145 @@ main {
 }
 
 h1 {
+  max-width: min(12ch, 100%);
   margin: 0;
   color: var(--ink);
-  font-family: Anton, sans-serif;
-  font-size: 132px;
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-h1 span {
-  display: table;
-  position: relative;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.l1,
-.l3 {
-  z-index: 1;
-}
-
-.l2 {
-  z-index: 2;
-}
-
-.l2::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: -0.1em;
-  right: -0.16em;
-  bottom: -0.08em;
-  left: -0.16em;
-  background: var(--orange);
+  font-size: 76px;
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
 }
 
 .intro {
-  max-width: 34rem;
-  margin: 48px 0 0;
+  max-width: 36rem;
+  margin: 28px 0 0;
   color: #3d465c;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.55;
 }
 
-.know {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  width: min(100%, 560px);
-  margin: 40px 0 0;
-}
-
-.know label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.know input {
-  width: min(100%, 280px);
-  height: 52px;
-  padding: 0 20px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-  color: var(--navy);
-  font-size: 15px;
-}
-
-.know input::placeholder {
-  color: #8b93a7;
-}
-
-.know input[aria-invalid="true"] {
-  border-color: var(--orange);
-}
-
-.know .solid {
-  height: 52px;
+.hero .solid {
+  height: 48px;
+  margin-top: 32px;
   padding: 0 22px;
   font-size: 15px;
 }
 
+.ways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  padding: 64px var(--pad) 80px;
+  background: #fff;
+}
+
+.ways h2 {
+  margin: 0 0 10px;
+  padding-top: 16px;
+  border-top: 3px solid var(--orange);
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.ways p {
+  margin: 0;
+  color: #3d465c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.join {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: center;
+  padding: 80px var(--pad);
+  background: var(--navy);
+  color: #fff;
+}
+
+.invite h2 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: 56px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.invite p {
+  max-width: 28rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+  padding: 28px;
+  border-radius: 18px;
+  background: #fff;
+  color: var(--navy);
+}
+
+.field {
+  min-width: 0;
+}
+
+.wide,
+.card .btn,
 .status {
-  flex-basis: 100%;
-  margin: 4px 0 0;
+  grid-column: 1 / -1;
+}
+
+.card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.card input,
+.card textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.card input {
+  height: 48px;
+  padding: 0 14px;
+}
+
+.card textarea {
+  min-height: 120px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.card input[aria-invalid="true"],
+.card textarea[aria-invalid="true"] {
+  border-color: var(--orange);
+}
+
+.card .btn {
+  height: 52px;
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.status {
+  margin: 0;
   color: var(--navy);
   font-size: 14px;
 }
@@ -246,21 +290,27 @@ footer {
     --pad: 24px;
   }
 
-  main {
-    padding-top: 72px;
-  }
-
-  h1 {
-    font-size: 64px;
-  }
-
   .intro {
     font-size: 16px;
   }
 
-  .know,
-  .know input {
-    width: 100%;
+  .ways,
+  .join,
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .top {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .invite h2 {
+    font-size: 40px;
   }
 
   footer {
